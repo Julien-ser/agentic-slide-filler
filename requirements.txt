@@ -1,3 +1,4 @@
 python-pptx>=0.6.21
 openai>=1.0.0
 python-docx>=0.8.11
+PyYAML>=6.0
