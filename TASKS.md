@@ -19,7 +19,7 @@
 - [x] Implement fallback mechanisms: add retry logic with exponential backoff, alternative model support (`gpt-4` → `gpt-3.5-turbo`), and error reporting to `logs/` directory
 
 ## Phase 4: Integration, Testing & Output
-- [ ] Assemble end-to-end pipeline: create main `SlideFiller` class in `src/slide_filler.py` that orchestrates parsing, mapping, generation, and filling; integrate all modules with dependency injection
-- [ ] Build output generation: implement `PPTXWriter` in `src/pptx_writer.py` that populates template with AI content, preserves formatting, and saves to `output/` with timestamped filenames
-- [ ] Create CLI interface: develop `cli.py` with argparse supporting arguments for template path, outline path, output path, and verbose logging; add `--dry-run` flag for testing
-- [ ] Write comprehensive test suite: add integration tests in `tests/test_integration.py` covering full workflow; create `tests/fixtures/` with sample templates and outlines; achieve 80%+ coverage with pytest
+ - [x] Assemble end-to-end pipeline: create main `SlideFiller` class in `src/slide_filler.py` that orchestrates parsing, mapping, generation, and filling; integrate all modules with dependency injection
+ - [x] Build output generation: implement `PPTXWriter` in `src/pptx_writer.py` that populates template with AI content, preserves formatting, and saves to `output/` with timestamped filenames
+ - [x] Create CLI interface: develop `cli.py` with argparse supporting arguments for template path, outline path, output path, and verbose logging; add `--dry-run` flag for testing
+ - [x] Write comprehensive test suite: add integration tests in `tests/test_integration.py` covering full workflow; create `tests/fixtures/` with sample templates and outlines; achieve 80%+ coverage with pytest

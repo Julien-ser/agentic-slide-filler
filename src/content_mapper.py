@@ -441,7 +441,7 @@ class ContentMapper:
         # Layout name relevance (0.3)
         layout_name = layout['name'].lower()
         title = section.get('title', '').lower()
-        if any(word in layout_name for word in title.split() if len(word) > 3)):
+         if any(word in layout_name for word in title.split() if len(word) > 3):
             score += 0.3
         elif 'title' in layout_name and section.get('level', 0) == 1:
             score += 0.25
