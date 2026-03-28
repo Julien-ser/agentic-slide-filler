@@ -56,7 +56,7 @@ An AI-powered tool that automatically generates professional PowerPoint presenta
 
 ```bash
 # Install dependencies
-pip install python-pptx openai python-docx pytest PyYAML
+pip install python-pptx openai python-docx pytest PyYAML python-dotenv
 
 # Or with requirements.txt
 pip install -r requirements.txt
@@ -65,9 +65,30 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env and add your OPENAI_API_KEY
 
+# Optional: customize configuration
+# Copy and modify config.yaml as needed
+cp config.yaml config.local.yaml
+
 # Run the tool
 python -m src.cli --template template.pptx --outline outline.docx --output presentation.pptx
 ```
+
+## Configuration
+
+The application supports configuration through:
+
+**Environment Variables** (`.env` file):
+- `OPENAI_API_KEY` - Your OpenAI API key (required)
+- `ANTHROPIC_API_KEY` - Anthropic API key (optional, for Claude)
+
+**Configuration File** (`config.yaml` or `config.local.yaml`):
+- OpenAI model settings (model name, temperature, max tokens)
+- File paths (templates, output, cache, logs)
+- Output filename patterns
+- Content generation parameters (retry attempts, caching)
+- Logging configuration
+
+Configuration precedence: environment variables > `config.local.yaml` > `config.yaml`
 
 ## Project Structure
 
@@ -76,7 +97,10 @@ python -m src.cli --template template.pptx --outline outline.docx --output prese
 ├── README.md              # This file
 ├── TASKS.md               # Development progress
 ├── requirements.txt       # Python dependencies
-├── .env.example          # Environment template
+├── config.yaml            # Application configuration
+├── config.local.yaml      # Local overrides (optional)
+├── .env.example          # Environment variable template
+├── .env                  # Local environment variables (gitignored)
 ├── src/                  # Source code
 │   ├── template_parser.py
 │   ├── outline_parser.py
