@@ -6,7 +6,7 @@ import logging
 
 try:
     from pptx import Presentation
-    from pptx.enum.shapes import MSO_SHAPE_TYPE, MSO_PLACEHOLDER
+    from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
 except ImportError as e:
     raise ImportError(f"python-pptx is required: {e}")
 
@@ -129,26 +129,26 @@ class TemplateParser:
         Convert python-pptx placeholder type enum to string.
 
         Args:
-            ph_type: Placeholder type enum from MSO_PLACEHOLDER
+            ph_type: Placeholder type enum from PP_PLACEHOLDER
 
         Returns:
             String representation of placeholder type
         """
         type_mapping = {
-            MSO_PLACEHOLDER.TITLE: "TITLE",
-            MSO_PLACEHOLDER.BODY: "BODY",
-            MSO_PLACEHOLDER.CENTER_TITLE: "CENTER_TITLE",
-            MSO_PLACEHOLDER.SUBTITLE: "SUBTITLE",
-            MSO_PLACEHOLDER.DATE: "DATE",
-            MSO_PLACEHOLDER.SLIDE_NUMBER: "SLIDE_NUMBER",
-            MSO_PLACEHOLDER.FOOTER: "FOOTER",
-            MSO_PLACEHOLDER.OBJECT: "OBJECT",
-            MSO_PLACEHOLDER.CHART: "CHART",
-            MSO_PLACEHOLDER.TABLE: "TABLE",
-            MSO_PLACEHOLDER.CLIP_ART: "CLIP_ART",
-            MSO_PLACEHOLDER.SMART_ART: "SMART_ART",
-            MSO_PLACEHOLDER.MEDIA: "MEDIA",
-            MSO_PLACEHOLDER.PICTURE: "PICTURE",
+            PP_PLACEHOLDER.TITLE: "TITLE",
+            PP_PLACEHOLDER.BODY: "BODY",
+            PP_PLACEHOLDER.CENTER_TITLE: "CENTER_TITLE",
+            PP_PLACEHOLDER.SUBTITLE: "SUBTITLE",
+            PP_PLACEHOLDER.DATE: "DATE",
+            PP_PLACEHOLDER.SLIDE_NUMBER: "SLIDE_NUMBER",
+            PP_PLACEHOLDER.FOOTER: "FOOTER",
+            PP_PLACEHOLDER.OBJECT: "OBJECT",
+            PP_PLACEHOLDER.CHART: "CHART",
+            PP_PLACEHOLDER.TABLE: "TABLE",
+            PP_PLACEHOLDER.CLIP_ART: "CLIP_ART",
+            PP_PLACEHOLDER.SMART_ART: "SMART_ART",
+            PP_PLACEHOLDER.MEDIA: "MEDIA",
+            PP_PLACEHOLDER.PICTURE: "PICTURE",
         }
 
         return type_mapping.get(ph_type, "UNKNOWN")

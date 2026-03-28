@@ -4,7 +4,7 @@ import tempfile
 import pytest
 from pathlib import Path
 from pptx import Presentation
-from pptx.enum.shapes import MSO_PLACEHOLDER
+from pptx.enum.shapes import PP_PLACEHOLDER
 
 from src.template_parser import TemplateParser
 
