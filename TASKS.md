@@ -3,7 +3,7 @@
 ## Phase 1: Planning & Setup
 - [x] Define technical architecture: select Python as base language, choose `python-pptx` for PPT manipulation, `openai` API (or `anthropic`) for AI generation, and `python-docx` for Word outline parsing; create system architecture diagram
 - [x] Set up project structure with `src/`, `tests/`, `templates/`, `output/`, `docs/` directories; initialize Python virtual environment and `requirements.txt` with `python-pptx>=0.6.21`, `openai>=1.0.0`, `python-docx>=0.8.11`
-- [ ] Create configuration management: implement `config.yaml` for API keys, template paths, and output settings; add `.env.example` template with `OPENAI_API_KEY` placeholder
+- [x] Create configuration management: implement `config.yaml` for API keys, template paths, and output settings; add `.env.example` template with `OPENAI_API_KEY` placeholder
 - [ ] Establish Git repository with `.gitignore` for Python, IDE files, and sensitive configs; write initial `README.md` with project overview and setup instructions
 
 ## Phase 2: Template & Outline Processing
