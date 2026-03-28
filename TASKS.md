@@ -13,10 +13,10 @@
 - [ ] Add template validation: write unit tests in `tests/test_template_parser.py` that verify placeholder detection, layout identification, and error handling for corrupted templates
 
 ## Phase 3: AI Content Generation
-- [ ] Design LLM prompt templates: create prompt engineering module in `src/prompts.py` with specialized prompts for title slides, bullet points, charts, and image descriptions; include few-shot examples
-- [ ] Build AI content generator: implement `AIContentGenerator` class in `src/ai_generator.py` that calls OpenAI API with temperature control, handles rate limits, and caches responses in `cache/` directory
-- [ ] Add content validation and sanitization: create `ContentValidator` in `src/validator.py` that checks generated text for length constraints, formatting rules, and placeholder compatibility
-- [ ] Implement fallback mechanisms: add retry logic with exponential backoff, alternative model support (`gpt-4` → `gpt-3.5-turbo`), and error reporting to `logs/` directory
+- [x] Design LLM prompt templates: create prompt engineering module in `src/prompts.py` with specialized prompts for title slides, bullet points, charts, and image descriptions; include few-shot examples
+- [x] Build AI content generator: implement `AIContentGenerator` class in `src/ai_generator.py` that calls OpenAI API with temperature control, handles rate limits, and caches responses in `cache/` directory
+- [x] Add content validation and sanitization: create `ContentValidator` in `src/validator.py` that checks generated text for length constraints, formatting rules, and placeholder compatibility
+- [x] Implement fallback mechanisms: add retry logic with exponential backoff, alternative model support (`gpt-4` → `gpt-3.5-turbo`), and error reporting to `logs/` directory
 
 ## Phase 4: Integration, Testing & Output
 - [ ] Assemble end-to-end pipeline: create main `SlideFiller` class in `src/slide_filler.py` that orchestrates parsing, mapping, generation, and filling; integrate all modules with dependency injection
