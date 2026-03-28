@@ -126,13 +126,13 @@ Configuration precedence: environment variables > `config.local.yaml` > `config.
 ### Completed
 - ✅ Template parser (`src/template_parser.py`): Extracts slide layouts, placeholders, and metadata from PPTX templates
 - ✅ Outline parser (`src/outline_parser.py`): Extracts hierarchical content from DOCX and Markdown documents
+- ✅ Content mapper (`src/content_mapper.py`): Aligns outline sections with template placeholders using intelligent matching
 - ✅ Comprehensive unit tests (`tests/test_template_parser.py`) covering placeholder detection, layout identification, and error handling
 - ✅ Comprehensive unit tests (`tests/test_outline_parser.py`) covering DOCX/Markdown parsing, hierarchy extraction, and error handling
 
 ### In Progress
-- 🔄 Building content mapping engine
-- 🔄 Creating template validation
+- 🔄 Adding template validation
 
 ### Up Next
-- Build `ContentMapper` for aligning outline sections with template placeholders
-- Implement `AIContentGenerator` for LLM-based content generation
+- Design LLM prompt templates (`src/prompts.py`)
+- Build AI content generator (`src/ai_generator.py`)
