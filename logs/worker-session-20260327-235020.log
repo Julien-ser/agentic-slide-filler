@@ -1011,3 +1011,228 @@ Everything up-to-date
 Completed task 10: Added comprehensive unit tests for TemplateParser in `tests/test_template_parser.py`, marked task as complete in TASKS.md, updated README.md with current progress, and added `src/__init__.py` for proper package imports. All changes committed and pushed.
 📝 Log saved: logs/iteration-8.md
 📊 Token Usage: 6750 / Session: 45500 / 64000
+✅ Changes committed
+To https://github.com/Julien-ser/agentic-slide-filler.git
+   588666b..add93be  wiggum/session -> wiggum/session
+✅ Pushed to GitHub (branch: wiggum/session)
+📊 Updated Tasks: 5/16 completed, 11 remaining
+   Next task: Implement doc outline parser: develop `OutlineParser` class ...
+📍 Iteration 9 at Sat Mar 28 12:01:11 AM EDT 2026...
+🤖 OpenCode processing: Implement doc outline parser: develop `OutlineParser` class in `src/outline_parser.py` supporting `.docx` and `.md` formats; extracts headings, sections, and content hierarchy into JSON structure
+[0m
+> build · stepfun/step-3.5-flash:free
+[0m
+[0m→ [0mRead .
+[0m→ [0mRead src
+[0m→ [0mRead src/template_parser.py
+I'll implement the doc outline parser. Let me first check the current project structure and existing code patterns.
+Now let me check the requirements.txt to see what dependencies are available:
+[0m→ [0mRead requirements.txt
+[0m→ [0mRead README.md
+[0m→ [0mRead tests
+Let me check the test structure and the config file:
+[0m→ [0mRead tests/test_template_parser.py
+[0m→ [0mRead config.yaml
+Excellent! Now I'll implement the `OutlineParser` class. Based on the existing patterns, I'll create a parser that supports both DOCX and Markdown formats.
+[0m
+[0m← [0mWrite src/outline_parser.py
+Wrote file successfully.
+
+LSP errors detected in other files:
+<diagnostics file="/home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/src/template_parser.py">
+ERROR [8:10] Import "pptx" could not be resolved
+ERROR [9:10] Import "pptx.enum.shapes" could not be resolved
+ERROR [85:63] "slide_layouts" is not a known attribute of "None"
+</diagnostics>
+
+LSP errors detected in other files:
+<diagnostics file="/home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/tests/test_template_parser.py">
+ERROR [6:6] Import "pptx" could not be resolved
+ERROR [7:6] Import "pptx.enum.shapes" could not be resolved
+</diagnostics>
+[0m
+Now let me update TASKS.md to mark the outline parser task as complete, and write tests for it:
+[0m→ [0mRead TASKS.md
+[0m
+[0m← [0mEdit TASKS.md
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/TASKS.md
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/TASKS.md
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/TASKS.md
+@@ -7,9 +7,9 @@
+ - [x] Establish Git repository with `.gitignore` for Python, IDE files, and sensitive configs; write initial `README.md` with project overview and setup instructions
+ 
+ ## Phase 2: Template & Outline Processing
+ - [x] Build PPT template parser: create `TemplateParser` class in `src/template_parser.py` that reads `.pptx` files, extracts slide layouts, placeholders, and shape types, returns structured template metadata
+-- [ ] Implement doc outline parser: develop `OutlineParser` class in `src/outline_parser.py` supporting `.docx` and `.md` formats; extracts headings, sections, and content hierarchy into JSON structure
++- [x] Implement doc outline parser: develop `OutlineParser` class in `src/outline_parser.py` supporting `.docx` and `.md` formats; extracts headings, sections, and content hierarchy into JSON structure
+ - [ ] Create content mapping engine: build `ContentMapper` class in `src/content_mapper.py` that aligns outline sections with template slide placeholders using section titles and placeholder tags
+ - [ ] Add template validation: write unit tests in `tests/test_template_parser.py` that verify placeholder detection, layout identification, and error handling for corrupted templates
+ 
+ ## Phase 3: AI Content Generation
+
+[0m
+Now let me create comprehensive tests for the OutlineParser:
+[0m← [0mWrite tests/test_outline_parser.py
+Wrote file successfully.
+
+LSP errors detected in other files:
+<diagnostics file="/home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/src/template_parser.py">
+ERROR [8:10] Import "pptx" could not be resolved
+ERROR [9:10] Import "pptx.enum.shapes" could not be resolved
+ERROR [85:63] "slide_layouts" is not a known attribute of "None"
+</diagnostics>
+
+LSP errors detected in other files:
+<diagnostics file="/home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/tests/test_template_parser.py">
+ERROR [6:6] Import "pptx" could not be resolved
+ERROR [7:6] Import "pptx.enum.shapes" could not be resolved
+</diagnostics>
+
+LSP errors detected in other files:
+<diagnostics file="/home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/src/outline_parser.py">
+ERROR [77:43] Argument of type "Path" cannot be assigned to parameter "docx" of type "str | IO[bytes] | None" in function "Document"
+  Type "Path" is not assignable to type "str | IO[bytes] | None"
+    "Path" is not assignable to "str"
+    "Path" is not assignable to "IO[bytes]"
+    "Path" is not assignable to "None"
+</diagnostics>
+[0m
+I need to fix the Path/str issue in the docx parsing:
+[0m← [0mEdit src/outline_parser.py
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/src/outline_parser.py
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/src/outline_parser.py
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/src/outline_parser.py
+@@ -73,9 +73,9 @@
+ 
+ def _parse_docx(self) -> None:
+     """Parse DOCX file by identifying headings and their content."""
+     try:
+-        self.document = docx.Document(self.outline_path)
++        self.document = docx.Document(str(self.outline_path))
+     except Exception as e:
+         raise RuntimeError(f"Failed to open DOCX file: {e}") from e
+ 
+     paragraphs = self.document.paragraphs
+
+[0m
+Now let me update the README.md to reflect that the OutlineParser is complete:
+[0m← [0mEdit README.md
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/README.md
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/README.md
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/README.md
+@@ -124,13 +124,15 @@
+ 🔄 **Phase 2**: Template & Outline Processing - In Progress
+ 
+ ### Completed
+ - ✅ Template parser (`src/template_parser.py`): Extracts slide layouts, placeholders, and metadata from PPTX templates
++- ✅ Outline parser (`src/outline_parser.py`): Extracts hierarchical content from DOCX and Markdown documents
+ - ✅ Comprehensive unit tests (`tests/test_template_parser.py`) covering placeholder detection, layout identification, and error handling
++- ✅ Comprehensive unit tests (`tests/test_outline_parser.py`) covering DOCX/Markdown parsing, hierarchy extraction, and error handling
+ 
+ ### In Progress
+-- 🔄 Building outline parser for DOCX and Markdown formats
+-- 🔄 Creating content mapping engine
++- 🔄 Building content mapping engine
++- 🔄 Creating template validation
+ 
+ ### Up Next
+-- Implement `OutlineParser` class (`src/outline_parser.py`)
+ - Build `ContentMapper` for aligning outline sections with template placeholders
++- Implement `AIContentGenerator` for LLM-based content generation
+
+[0m
+Now let me run the tests to verify the implementation:
+[0m$ [0mpython -m pytest tests/test_outline_parser.py -v
+============================= test session starts ==============================
+platform linux -- Python 3.14.3, pytest-7.4.3, pluggy-1.6.0 -- /home/julien/Desktop/Free-Wiggum-opencode/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler
+plugins: langsmith-0.7.16, anyio-4.13.0, cov-7.0.0, mock-3.15.1, dash-4.0.0, asyncio-0.21.1
+asyncio: mode=Mode.STRICT
+collecting ... collected 27 items
+
+tests/test_outline_parser.py::TestOutlineParserInitialization::test_init_with_valid_docx PASSED [  3%]
+tests/test_outline_parser.py::TestOutlineParserInitialization::test_init_with_valid_md PASSED [  7%]
+tests/test_outline_parser.py::TestOutlineParserInitialization::test_init_with_nonexistent_file PASSED [ 11%]
+tests/test_outline_parser.py::TestOutlineParserInitialization::test_init_with_unsupported_extension PASSED [ 14%]
+tests/test_outline_parser.py::TestOutlineParserParse::test_parse_docx_returns_structure_dict PASSED [ 18%]
+tests/test_outline_parser.py::TestOutlineParserParse::test_parse_md_returns_structure_dict PASSED [ 22%]
+tests/test_outline_parser.py::TestOutlineParserParse::test_parse_sections_are_list PASSED [ 25%]
+tests/test_outline_parser.py::TestOutlineParserParse::test_parse_idempotent PASSED [ 29%]
+tests/test_outline_parser.py::TestDocxParserStructure::test_simple_docx_sections_count FAILED [ 33%]
+tests/test_outline_parser.py::TestDocxParserStructure::test_section_structure PASSED [ 37%]
+tests/test_outline_parser.py::TestDocxParserStructure::test_hierarchy_preserved PASSED [ 40%]
+tests/test_outline_parser.py::TestDocxParserStructure::test_content_assigned_to_correct_section PASSED [ 44%]
+tests/test_outline_parser.py::TestDocxParserStructure::test_multiple_paragraphs_in_content PASSED [ 48%]
+tests/test_outline_parser.py::TestMarkdownParserStructure::test_simple_md_sections_count PASSED [ 51%]
+tests/test_outline_parser.py::TestMarkdownParserStructure::test_nested_md_hierarchy PASSED [ 55%]
+tests/test_outline_parser.py::TestMarkdownParserStructure::test_md_content_preserved PASSED [ 59%]
+tests/test_outline_parser.py::TestMarkdownParserStructure::test_md_levels_correct PASSED [ 62%]
+tests/test_outline_parser.py::TestOutlineParserHelperMethods::test_get_section_count PASSED [ 66%]
+tests/test_outline_parser.py::TestOutlineParserHelperMethods::test_get_section_count_without_parse PASSED [ 70%]
+tests/test_outline_parser.py::TestOutlineParserHelperMethods::test_get_flat_sections PASSED [ 74%]
+tests/test_outline_parser.py::TestOutlineParserErrorHandling::test_corrupted_docx_raises_runtime_error PASSED [ 77%]
+tests/test_outline_parser.py::TestOutlineParserErrorHandling::test_invalid_markdown_encoding PASSED [ 81%]
+tests/test_outline_parser.py::TestOutlineParserErrorHandling::test_markdown_with_no_headings PASSED [ 85%]
+tests/test_outline_parser.py::TestOutlineParserErrorHandling::test_docx_with_only_title_style PASSED [ 88%]
+tests/test_outline_parser.py::TestOutlineParserIntegration::test_complex_docx PASSED [ 92%]
+tests/test_outline_parser.py::TestOutlineParserIntegration::test_markdown_with_inconsistent_spacing PASSED [ 96%]
+tests/test_outline_parser.py::TestOutlineParserIntegration::test_empty_sections PASSED [100%]
+
+=================================== FAILURES ===================================
+___________ TestDocxParserStructure.test_simple_docx_sections_count ____________
+
+self = <test_outline_parser.TestDocxParserStructure object at 0x7f5e60d951d0>
+docx_parser = <src.outline_parser.OutlineParser object at 0x7f5e60bb4450>
+
+    def test_simple_docx_sections_count(self, docx_parser):
+        """Test simple DOCX has expected number of top-level sections."""
+        structure = docx_parser.parse()
+>       assert (
+            len(structure["sections"]) == 3
+        )  # Intro, Methodology, and possibly the second heading
+E       AssertionError: assert 2 == 3
+E        +  where 2 = len([{'children': [{'children': [], 'content': 'Some background information.', 'level': 2, 'title': 'Background'}, {'children': [], 'content': 'The main objectives are:\n• Objective 1\n• Objective 2', 'level': 2, 'title': 'Objectives'}], 'content': 'This is the introduction content.', 'level': 1, 'title': 'Introduction'}, {'children': [], 'content': 'We used the following methods.', 'level': 1, 'title': 'Methodology'}])
+
+tests/test_outline_parser.py:218: AssertionError
+=============================== warnings summary ===============================
+../../venv/lib/python3.14/site-packages/pytest_asyncio/plugin.py:156: 1431 warnings
+  /home/julien/Desktop/Free-Wiggum-opencode/venv/lib/python3.14/site-packages/pytest_asyncio/plugin.py:156: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return asyncio.iscoroutinefunction(obj)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_outline_parser.py::TestDocxParserStructure::test_simple_docx_sections_count
+================= 1 failed, 26 passed, 1431 warnings in 1.17s ==================
+[0m
+[0m✗ [0medit failed
+[91m[1mError: [0mCould not find oldString in the file. It must match exactly, including whitespace, indentation, and line endings.
+The test expects 3 but the fixture only has 2 top-level sections. Let me fix the test:
+Let me check the exact content:
+[0m→ [0mRead tests/test_outline_parser.py[90m [limit=10, offset=215][0m
+[0m
+[0m← [0mEdit tests/test_outline_parser.py
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/tests/test_outline_parser.py
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/tests/test_outline_parser.py
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/tests/test_outline_parser.py
+@@ -215,10 +215,10 @@
+ def test_simple_docx_sections_count(self, docx_parser):
+     """Test simple DOCX has expected number of top-level sections."""
+     structure = docx_parser.parse()
+     assert (
+-        len(structure["sections"]) == 3
+-    )  # Intro, Methodology, and possibly the second heading
++        len(structure["sections"]) == 2
++    )  # Introduction and Methodology (Background/Objectives are level 2)
+ 
+ def test_section_structure(self, docx_parser):
+     """Test each section has required fields."""
+     structure = docx_parser.parse()
+
+[0m
+📝 Log saved: logs/iteration-9.md
+📊 Token Usage: 7500 / Session: 53000 / 64000
