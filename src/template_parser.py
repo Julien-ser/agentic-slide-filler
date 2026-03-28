@@ -1,12 +1,12 @@
 """PPT Template Parser for extracting slide layouts and placeholders."""
 
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 import logging
 
 try:
     from pptx import Presentation
-    from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
+    from pptx.enum.shapes import PP_PLACEHOLDER
 except ImportError as e:
     raise ImportError(f"python-pptx is required: {e}")
 
@@ -33,7 +33,7 @@ class TemplateParser:
         if not self.template_path.suffix.lower() == ".pptx":
             raise ValueError(f"File must be a .pptx: {self.template_path}")
 
-        self.presentation: Optional[Presentation] = None
+        self.presentation = None
         self.metadata: Dict[str, Any] = {}
 
     def parse(self) -> Dict[str, Any]:
@@ -76,6 +76,7 @@ class TemplateParser:
 
     def _extract_metadata(self) -> None:
         """Extract metadata from presentation."""
+        assert self.presentation is not None, "Presentation must be initialized"
         self.metadata = {
             "template_name": self.template_path.name,
             "template_path": str(self.template_path),
