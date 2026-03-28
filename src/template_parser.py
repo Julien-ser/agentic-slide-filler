@@ -67,7 +67,7 @@ class TemplateParser:
             RuntimeError: If parsing fails
         """
         try:
-            self.presentation = Presentation(self.template_path)
+            self.presentation = Presentation(str(self.template_path))
             self._extract_metadata()
             return self.metadata
         except Exception as e:
@@ -109,12 +109,19 @@ class TemplateParser:
             phf = shape.placeholder_format
             try:
                 placeholder_type = self._get_placeholder_type(phf.type)
-            except ValueError:
+                # Access idx which may raise KeyError if placeholder index is invalid
+                idx = phf.idx
+            except (ValueError, KeyError):
                 placeholder_type = "UNKNOWN"
+                try:
+                    idx = phf.idx
+                except (ValueError, KeyError):
+                    # Skip this placeholder if idx is also inaccessible
+                    continue
 
             placeholder_info = {
                 "type": placeholder_type,
-                "idx": shape.placeholder_format.idx,
+                "idx": idx,
                 "width": shape.width.pt if shape.width else None,
                 "height": shape.height.pt if shape.height else None,
                 "left": shape.left.pt if shape.left else None,
