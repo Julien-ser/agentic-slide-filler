@@ -21,16 +21,25 @@ def sample_template_path(tmp_path):
     # Add a slide with title and content layout
     if len(prs.slide_layouts) > 1:
         title_slide = prs.slides.add_slide(prs.slide_layouts[1])  # Title slide
-        title_shape = title_slide.shapes.title
-        title_shape.text = "Test Title"
-        subtitle = title_slide.placeholders[1]
-        subtitle.text = "Test Subtitle"
+        if title_slide.shapes.title:
+            title_slide.shapes.title.text = "Test Title"
+        # Try to set subtitle if available
+        try:
+            subtitle = title_slide.placeholders[1]
+            subtitle.text = "Test Subtitle"
+        except (KeyError, IndexError):
+            pass
 
     # Add a content slide with placeholders
-    content_slide = prs.slides.add_slide(prs.slide_layouts[5])  # Title and content
-    content_slide.shapes.title.text = "Content Slide"
-    content_placeholder = content_slide.placeholders[1]
-    content_placeholder.text = "Bullet 1\nBullet 2\nBullet 3"
+    if len(prs.slide_layouts) > 5:
+        content_slide = prs.slides.add_slide(prs.slide_layouts[5])  # Title and content
+        if content_slide.shapes.title:
+            content_slide.shapes.title.text = "Content Slide"
+        try:
+            content_placeholder = content_slide.placeholders[1]
+            content_placeholder.text = "Bullet 1\nBullet 2\nBullet 3"
+        except (KeyError, IndexError):
+            pass
 
     prs.save(template_path)
     return template_path

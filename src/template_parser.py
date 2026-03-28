@@ -134,22 +134,27 @@ class TemplateParser:
         Returns:
             String representation of placeholder type
         """
-        type_mapping = {
-            PP_PLACEHOLDER.TITLE: "TITLE",
-            PP_PLACEHOLDER.BODY: "BODY",
-            PP_PLACEHOLDER.CENTER_TITLE: "CENTER_TITLE",
-            PP_PLACEHOLDER.SUBTITLE: "SUBTITLE",
-            PP_PLACEHOLDER.DATE: "DATE",
-            PP_PLACEHOLDER.SLIDE_NUMBER: "SLIDE_NUMBER",
-            PP_PLACEHOLDER.FOOTER: "FOOTER",
-            PP_PLACEHOLDER.OBJECT: "OBJECT",
-            PP_PLACEHOLDER.CHART: "CHART",
-            PP_PLACEHOLDER.TABLE: "TABLE",
-            PP_PLACEHOLDER.CLIP_ART: "CLIP_ART",
-            PP_PLACEHOLDER.SMART_ART: "SMART_ART",
-            PP_PLACEHOLDER.MEDIA: "MEDIA",
-            PP_PLACEHOLDER.PICTURE: "PICTURE",
-        }
+        # Build mapping dynamically to handle version differences in PP_PLACEHOLDER
+        placeholder_names = [
+            "TITLE",
+            "BODY",
+            "CENTER_TITLE",
+            "SUBTITLE",
+            "DATE",
+            "SLIDE_NUMBER",
+            "FOOTER",
+            "OBJECT",
+            "CHART",
+            "TABLE",
+            "PICTURE",
+            "CLIP_ART",
+            "SMART_ART",
+            "MEDIA",
+        ]
+        type_mapping = {}
+        for name in placeholder_names:
+            if hasattr(PP_PLACEHOLDER, name):
+                type_mapping[getattr(PP_PLACEHOLDER, name)] = name
 
         return type_mapping.get(ph_type, "UNKNOWN")
 
