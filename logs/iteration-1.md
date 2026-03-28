@@ -556,3 +556,78 @@ Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/T
  
 
 [0m
+[0m$ [0mgit add . && git status
+On branch wiggum/session
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   .agent_role
+	new file:   .worker_persistent_mode
+	modified:   README.md
+	modified:   TASKS.md
+	new file:   TASKS_original.md
+	new file:   logs/iteration-1.md
+	new file:   logs/worker-session-20260327-235020.log
+[0m
+Now I'll commit these changes to GitHub:
+[0m$ [0mgit commit -m "docs: define technical architecture and system design
+
+- Select Python as base language with python-pptx, openai, python-docx
+- Create system architecture diagram in README
+- Update README with project overview, architecture, and setup instructions
+- Mark Phase 1 Task 1 as complete in TASKS.md"
+[wiggum/session 8043752] docs: define technical architecture and system design
+ 7 files changed, 858 insertions(+), 21 deletions(-)
+ create mode 100644 .agent_role
+ create mode 100644 .worker_persistent_mode
+ create mode 100644 TASKS_original.md
+ create mode 100644 logs/iteration-1.md
+ create mode 100644 logs/worker-session-20260327-235020.log
+[0m
+[0m$ [0mgit push origin wiggum/session
+To https://github.com/Julien-ser/agentic-slide-filler.git
+ * [new branch]      wiggum/session -> wiggum/session
+[0m
+[0m$ [0mgit status
+On branch wiggum/session
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   logs/iteration-1.md
+	modified:   logs/worker-session-20260327-235020.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[0m
+✓ Task 1 complete: Technical architecture defined in README.md with system diagram. TASKS.md updated. Changes pushed to GitHub.
+```
+
+## TASKS.md After Iteration
+
+```markdown
+# agentic-slide-filler
+
+## Phase 1: Planning & Setup
+- [x] Define technical architecture: select Python as base language, choose `python-pptx` for PPT manipulation, `openai` API (or `anthropic`) for AI generation, and `python-docx` for Word outline parsing; create system architecture diagram
+- [ ] Set up project structure with `src/`, `tests/`, `templates/`, `output/`, `docs/` directories; initialize Python virtual environment and `requirements.txt` with `python-pptx>=0.6.21`, `openai>=1.0.0`, `python-docx>=0.8.11`
+- [ ] Create configuration management: implement `config.yaml` for API keys, template paths, and output settings; add `.env.example` template with `OPENAI_API_KEY` placeholder
+- [ ] Establish Git repository with `.gitignore` for Python, IDE files, and sensitive configs; write initial `README.md` with project overview and setup instructions
+
+## Phase 2: Template & Outline Processing
+- [ ] Build PPT template parser: create `TemplateParser` class in `src/template_parser.py` that reads `.pptx` files, extracts slide layouts, placeholders, and shape types, returns structured template metadata
+- [ ] Implement doc outline parser: develop `OutlineParser` class in `src/outline_parser.py` supporting `.docx` and `.md` formats; extracts headings, sections, and content hierarchy into JSON structure
+- [ ] Create content mapping engine: build `ContentMapper` class in `src/content_mapper.py` that aligns outline sections with template slide placeholders using section titles and placeholder tags
+- [ ] Add template validation: write unit tests in `tests/test_template_parser.py` that verify placeholder detection, layout identification, and error handling for corrupted templates
+
+## Phase 3: AI Content Generation
+- [ ] Design LLM prompt templates: create prompt engineering module in `src/prompts.py` with specialized prompts for title slides, bullet points, charts, and image descriptions; include few-shot examples
+- [ ] Build AI content generator: implement `AIContentGenerator` class in `src/ai_generator.py` that calls OpenAI API with temperature control, handles rate limits, and caches responses in `cache/` directory
+- [ ] Add content validation and sanitization: create `ContentValidator` in `src/validator.py` that checks generated text for length constraints, formatting rules, and placeholder compatibility
+- [ ] Implement fallback mechanisms: add retry logic with exponential backoff, alternative model support (`gpt-4` → `gpt-3.5-turbo`), and error reporting to `logs/` directory
+
+## Phase 4: Integration, Testing & Output
+- [ ] Assemble end-to-end pipeline: create main `SlideFiller` class in `src/slide_filler.py` that orchestrates parsing, mapping, generation, and filling; integrate all modules with dependency injection
+- [ ] Build output generation: implement `PPTXWriter` in `src/pptx_writer.py` that populates template with AI content, preserves formatting, and saves to `output/` with timestamped filenames
+- [ ] Create CLI interface: develop `cli.py` with argparse supporting arguments for template path, outline path, output path, and verbose logging; add `--dry-run` flag for testing
+- [ ] Write comprehensive test suite: add integration tests in `tests/test_integration.py` covering full workflow; create `tests/fixtures/` with sample templates and outlines; achieve 80%+ coverage with pytest
+```
+
+**Completed at:** Fri Mar 27 11:51:34 PM EDT 2026
