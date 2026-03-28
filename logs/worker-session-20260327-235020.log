@@ -752,3 +752,86 @@ Current status committed and pushed to GitHub.
 **Next task**: Build PPT template parser (`src/template_parser.py`) – extract slide layouts, placeholders, and shape types from `.pptx` files.
 📝 Log saved: logs/iteration-6.md
 📊 Token Usage: 5000 / Session: 33750 / 64000
+✅ Changes committed
+To https://github.com/Julien-ser/agentic-slide-filler.git
+   516cd7b..72d1bbb  wiggum/session -> wiggum/session
+✅ Pushed to GitHub (branch: wiggum/session)
+📊 Updated Tasks: 4/16 completed, 12 remaining
+   Next task: Build PPT template parser: create `TemplateParser` class in ...
+📍 Iteration 7 at Fri Mar 27 11:56:32 PM EDT 2026...
+🤖 OpenCode processing: Build PPT template parser: create `TemplateParser` class in `src/template_parser.py` that reads `.pptx` files, extracts slide layouts, placeholders, and shape types, returns structured template metadata
+[0m
+> build · stepfun/step-3.5-flash:free
+[0m
+I'll build the PPT template parser component. Let me first explore the project structure and check what's already in place.
+[0m→ [0mRead TASKS.md
+[0m→ [0mRead requirements.txt
+[0m
+[0m$ [0mls -la
+total 96
+drwxr-xr-x 10 julien julien 4096 Mar 27 23:53 .
+drwxr-xr-x 33 julien julien 4096 Mar 27 23:49 ..
+-rw-r--r--  1 julien julien    8 Mar 27 23:50 .agent_role
+-rw-r--r--  1 julien julien  181 Mar 27 23:49 .coderabbit.yaml
+-rw-r--r--  1 julien julien  871 Mar 27 23:54 config.yaml
+drwxr-xr-x  2 julien julien 4096 Mar 27 23:52 docs
+-rw-r--r--  1 julien julien  254 Mar 27 23:54 .env.example
+drwxr-xr-x  7 julien julien 4096 Mar 27 23:56 .git
+drwxr-xr-x  3 julien julien 4096 Mar 27 23:49 .github
+-rw-r--r--  1 julien julien  476 Mar 27 23:53 .gitignore
+drwxr-xr-x  2 julien julien 4096 Mar 27 23:56 logs
+drwxr-xr-x  2 julien julien 4096 Mar 27 23:52 output
+-rw-r--r--  1 julien julien 9218 Mar 27 23:49 prompt.txt
+-rw-r--r--  1 julien julien 5653 Mar 27 23:54 README.md
+-rw-r--r--  1 julien julien   66 Mar 27 23:53 requirements.txt
+drwxr-xr-x  2 julien julien 4096 Mar 27 23:52 src
+-rw-r--r--  1 julien julien 3341 Mar 27 23:56 TASKS.md
+-rw-r--r--  1 julien julien 3341 Mar 27 23:50 TASKS_original.md
+drwxr-xr-x  2 julien julien 4096 Mar 27 23:52 templates
+drwxr-xr-x  2 julien julien 4096 Mar 27 23:52 tests
+-rw-r--r--  1 julien julien    6 Mar 27 23:50 .worker_persistent_mode
+[0m
+[0m$ [0mls -la src/ tests/
+src/:
+total 8
+drwxr-xr-x  2 julien julien 4096 Mar 27 23:52 .
+drwxr-xr-x 10 julien julien 4096 Mar 27 23:53 ..
+
+tests/:
+total 8
+drwxr-xr-x  2 julien julien 4096 Mar 27 23:52 .
+drwxr-xr-x 10 julien julien 4096 Mar 27 23:53 ..
+[0m
+[0m→ [0mRead README.md
+[0m
+[0m$ [0mls -la templates/
+total 8
+drwxr-xr-x  2 julien julien 4096 Mar 27 23:52 .
+drwxr-xr-x 10 julien julien 4096 Mar 27 23:53 ..
+[0m
+[0m# [0mTodos
+[ ] Design TemplateParser class structure and API
+[ ] Implement template parsing with python-pptx
+[ ] Create unit tests for TemplateParser
+[ ] Create test fixtures (sample PPTX templates)
+[ ] Run tests and verify functionality
+[0m
+Now I'll create the `TemplateParser` class. First, let me create a todo list for this task:
+[0m← [0mWrite src/template_parser.py
+Wrote file successfully.
+
+LSP errors detected in this file, please fix:
+<diagnostics file="/home/julien/Desktop/Free-Wiggum-opencode/projects/agentic-slide-filler/src/template_parser.py">
+ERROR [8:10] Import "pptx" could not be resolved
+ERROR [9:10] Import "pptx.enum.shapes" could not be resolved
+ERROR [85:63] "slide_layouts" is not a known attribute of "None"
+</diagnostics>
+[0m
+[0m# [0mTodos
+[x] Design TemplateParser class structure and API
+[x] Implement template parsing with python-pptx
+[ ] Create unit tests for TemplateParser
+[ ] Create test fixtures (sample PPTX templates)
+[ ] Install dependencies and run tests
+[0m
+📝 Log saved: logs/iteration-7.md
